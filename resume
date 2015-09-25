@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo -e "\nPATH=\$PATH:/scripts\nexport PATH" >> ~/.bash_profile
+
+# gotta copy over all executables that we expect to be in the path...should this come from a share 
+# or an install script?

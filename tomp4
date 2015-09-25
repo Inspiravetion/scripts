@@ -1,0 +1,23 @@
+#!/bin/sh
+
+#Run in current directory or optional root
+base_path=${PWD}
+
+if [ $# != 0 ]; then
+    base_path=$1
+fi
+
+IFS=$'\n'
+
+# Convert all the things
+files="$(find $base_path -type f -name '*.mkv')"
+
+for file in $files; do
+	mp4file=${file%.mkv}.mp4
+
+	#if there isnt an mp4 file with the same basename create one
+	if [ ! -f $mp4file ]; then
+		ffmpeg -y -i "$file" -vcodec copy -acodec copy "$mp4file";
+	fi
+	
+done
