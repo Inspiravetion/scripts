@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#Prepend the file with "#!/bin/sh"...use sh over bash in case of another implementation
+# echo \#\!/bin/sh\\n | cat - $1 > /tmp/out && mv /tmp/out $1
+
+#Give the file executable permissions
+# chmod +x $1
+
+pushd /scripts
+
+echo git add .
+echo git commit -m "adding $1 to the repo of blessed scripts"
+echo git push origin master
+
+popd
