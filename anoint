@@ -6,4 +6,4 @@ echo \#\!/bin/sh\\n | cat - $1 > /tmp/out && mv /tmp/out $1
 #Give the file executable permissions
 chmod +x $1
 
-save "adding $1 to the repo of blessed scripts"
+save /scripts "adding $1 to the repo of blessed scripts"
