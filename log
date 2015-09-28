@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#!/bin/sh
+
 Default='\033[0m' # No Color
 Black='\033[0;30m'     
 DarkGray='\033[1;30m'
