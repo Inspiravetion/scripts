@@ -1,0 +1,12 @@
+#create new items in a way that tracks them for automatic backup
+
+#ex.
+#$>new repo RepoName
+#translates to
+#$>git init ~/Projects/Code RepoName
+#then add it to a tracked repos file so backup knows to run save on that repo with an automated message
+
+#$>new folder Projects/Blog
+#translates to 
+#$>make the folder locally, and add it to a file of tracked folders to be mirrored
+

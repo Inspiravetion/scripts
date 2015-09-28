@@ -1,0 +1,5 @@
+#backup all git repos and store their .git folder so you can put it back and keep your local state later
+
+#backup any files on my local that arent on the remote in the mirrored folders
+
+#make this compliment new
