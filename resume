@@ -1,12 +1,15 @@
 #!/bin/sh
+scripts=$(secret global.scripts.path)
+script_libs=$(secret global.script.lib.paths) 
+bash_profile=$(secret global.bash.profile.path)
 
 #1. Put scripts in path
-echo -e "\nPATH=\$PATH:/Env/scripts\nexport PATH" >> ~/.bash_profile
+echo "\nPATH=\$PATH:${scripts}\nexport PATH" >> $bash_profile
 
 #2. Have all global script libs be available to all terminals and thus scripts
-for lib in $(secret global.script.lib.paths) 
+for lib in $script_libs
 do
-	echo "\nsource $lib" >> ~/.bash_profile
+	echo "\nsource $lib" >> $bash_profile
 done
 
 #3. Copy over all executables that we expect to be in the path
