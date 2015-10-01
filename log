@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#!/bin/sh
-
 Default='\033[0m' # No Color
 Black='\033[0;30m'     
 DarkGray='\033[1;30m'
@@ -20,19 +18,24 @@ Light_Cyan='\033[1;36m'
 Light_Gray='\033[0;37m'     
 White='\033[1;37m'
 
-function log_title()
+# function log_title()
+# {
+
+# }
+
+# function log_step()
+# {
+
+# }
+
+function log_success()
 {
-
-}
-
-function log_step()
-{
-
+	echo -e "${LightGreen}Success: ${Default}$1"
 }
 
 function log_info()
 {
-	echo -e "${Yellow}Info: ${Default}$1"
+	echo -e "${Light_Gray}Info: ${Default}$1"
 }
 
 function log_warning()

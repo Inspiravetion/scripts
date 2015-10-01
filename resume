@@ -1,6 +1,14 @@
 #!/bin/sh
 
+#1. Put scripts in path
 echo -e "\nPATH=\$PATH:/Env/scripts\nexport PATH" >> ~/.bash_profile
 
-# gotta copy over all executables that we expect to be in the path...should this come from a share 
-# or an install script?
+#2. Have all global script libs be available to all terminals and thus scripts
+for lib in $(secret global.script.lib.paths) 
+do
+	echo "\nsource $lib" >> ~/.bash_profile
+done
+
+#3. Copy over all executables that we expect to be in the path
+
+#4. Copy over all the files we expect to have locally

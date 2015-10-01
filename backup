@@ -2,4 +2,6 @@
 
 #backup any files on my local that arent on the remote in the mirrored folders
 
+#move .secrets.md to personal backup
+
 #make this compliment new

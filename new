@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #create new items in a way that tracks them for automatic backup
 
 #ex.
@@ -10,3 +12,36 @@
 #translates to 
 #$>make the folder locally, and add it to a file of tracked folders to be mirrored
 
+#$>new secret a.b.c 12345
+#translates to
+#echo -e "\n# $2\n- $3" >> /Env/.secrets.md
+
+function new_secret() {
+	#check to see if the secret key is already in use...
+	secret_string="\n# $1" 
+	shift
+
+	while IFS=',' read -a value; do
+
+	    for element in "${value[@]}"; do
+		    secret_string=$secret_string"\n- $element"
+		done
+
+	done <<< "$*"
+
+	echo $secret_string >> $(secret global.secrets.path)
+}
+
+#main
+
+resource=$1
+shift
+
+case $resource in
+	secret)  
+	  new_secret $*
+	;;
+	repo)  
+	  echo new repo!
+  	;;
+esac
