@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo mkdir /Volumes/HQ
+# sudo mount -t afp afp://user:pass@ipaddress/SharedDrive /Volumes/mount
+sudo mount_afp afp://Charles%20Lipford;AUTH=SRP@SPHQ.local/Data /Volumes/HQ

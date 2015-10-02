@@ -1,17 +1,33 @@
 #!/bin/sh
+
+#######################################
+#             Secrets                 #
+#######################################
+
+bin=$(secret global.bin.path)
+
 scripts=$(secret global.scripts.path)
+
 script_libs=$(secret global.script.lib.paths) 
+
 bash_profile=$(secret global.bash.profile.path)
 
-#1. Put scripts in path
+#######################################
+#       Restore All The Things        #
+#######################################
+
+# Copy over all files from backup
+
+# Copy over all executables that we expect to be in the path
+
+# Put global bin first to give it precedence
+echo "\nPATH=$bin:\$PATH\nexport PATH" >> $bash_profile
+
+# Put scripts in path
 echo "\nPATH=\$PATH:${scripts}\nexport PATH" >> $bash_profile
 
-#2. Have all global script libs be available to all terminals and thus scripts
+# Have all global script libs be available to all terminals and thus scripts
 for lib in $script_libs
 do
 	echo "\nsource $lib" >> $bash_profile
 done
-
-#3. Copy over all executables that we expect to be in the path
-
-#4. Copy over all the files we expect to have locally
