@@ -46,7 +46,7 @@ end
 for @char in read::chars from::stdin do 
    write @char #simply writes to stdout
    write::error @char to::stderr #formats @char with the write::error writer and then prints it to stderr
-   write::info @char to::stdout
+   write::info @char to::stdout 
    write::warning @char to::stdout
    write::inspiravetion @char to::stdout #create easy logging hooks
 end
@@ -77,7 +77,8 @@ end #Iterator returns None
 # from::* is really just readers
 # to::* is really just writers
 # write::* is really just different writing policies...append, overwrite, prepend, insert, failifexists
-#for write::file 
+#this might be an associated types problem...as in all writers but take different options?
+#for to::file also include to::file::{prepend, append, overwrite, create_or_fail}
 ```
 
 # builtins:
@@ -131,6 +132,12 @@ end #Iterator returns None
     -Builtin
         from::* => source // readers
         to:* => dest //writers
+        or::* => //error handling
+            -a failure crashes the whole process by default
+            -or::retry(N)
+            -or::goto/call/run()
+            -or::continue #let it fail
+
 
 # Imports
     -importing a protocal from another script goes <script>::<protocal_type>::<protocal>

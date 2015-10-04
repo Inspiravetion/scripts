@@ -1,0 +1,7 @@
+#!/bin/sh
+
+connect_to_hq
+
+scdl -l https://soundcloud.com/salva/i-just-wanna -r
+
+disconnect_from_hq

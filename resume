@@ -37,3 +37,12 @@ echo "\nPATH=\$PATH:${scripts}\nexport PATH" >> $bash_profile
 for lib in $script_libs; do
 	echo "\nsource $lib" >> $bash_profile
 done
+
+# Install Homebrew(Needs RUBY)
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)";
+
+# Install scdl deps
+brew instal curl eyeD3
+
+# Move scdl config over (bin came with the bin copy)
+cp ../.scdl.cfg $HOME/
