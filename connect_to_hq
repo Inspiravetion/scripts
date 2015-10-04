@@ -1,5 +1,18 @@
 #!/bin/sh
 
-sudo mkdir /Volumes/HQ
-# sudo mount -t afp afp://user:pass@ipaddress/SharedDrive /Volumes/mount
-sudo mount_afp afp://Charles%20Lipford;AUTH=SRP@SPHQ.local/Data /Volumes/HQ
+share_path=$(secret global.share.remote.path)
+
+username=$(secret global.share.username)
+
+password=$(secret global.share.password)
+
+share_mount_path=$(secret global.share.local.path)
+
+# Check if share is already mounted
+if [ ! -d $share_mount_path ]; then
+	sudo mkdir $share_mount_path
+
+	#mount the time capsule 
+	sudo mount_afp afp://${username}:${password}@${share_path} $share_mount_path
+fi
+

@@ -6,6 +6,10 @@
 
 bin=$(secret global.bin.path)
 
+backup_dirs=$(secret global.paths)
+
+hq=$(secret global.share.mount.path)
+
 scripts=$(secret global.scripts.path)
 
 script_libs=$(secret global.script.lib.paths) 
@@ -17,8 +21,11 @@ bash_profile=$(secret global.bash.profile.path)
 #######################################
 
 # Copy over all files from backup
+connect_to_hq
 
-# Copy over all executables that we expect to be in the path
+for dir in $backup_dirs; do
+	sudo cp -r $hq$dir $dir
+done
 
 # Put global bin first to give it precedence
 echo "\nPATH=$bin:\$PATH\nexport PATH" >> $bash_profile
@@ -27,7 +34,6 @@ echo "\nPATH=$bin:\$PATH\nexport PATH" >> $bash_profile
 echo "\nPATH=\$PATH:${scripts}\nexport PATH" >> $bash_profile
 
 # Have all global script libs be available to all terminals and thus scripts
-for lib in $script_libs
-do
+for lib in $script_libs; do
 	echo "\nsource $lib" >> $bash_profile
 done

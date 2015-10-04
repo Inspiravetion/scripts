@@ -1,0 +1,9 @@
+#!/bin/sh
+
+share_local_path=$(secret global.share.local.path)
+
+# Check if share is actually mounted
+if [ -d $share_local_path ]; then
+	#unmount the time capsule 
+	sudo umount $share_local_path
+fi
