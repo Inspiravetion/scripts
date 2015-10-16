@@ -2,6 +2,6 @@
 
 connect_to_hq
 
-scdl -l https://soundcloud.com/salva/i-just-wanna -r
+python3 /usr/local/bin/scdl me -a
 
 disconnect_from_hq
