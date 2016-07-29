@@ -102,7 +102,7 @@ end #Iterator returns None
 # sigils
     @variable //script scoped variable
     $variable //script local env variable
-    #variable //global env variable
+    !variable //global env variable
 
 # Goals
     -readable

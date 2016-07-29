@@ -1,7 +1,7 @@
 #!/bin/sh
 
-connect_to_hq
+# connect_to_hq
 
-python3 /usr/local/bin/scdl me -a
-
-disconnect_from_hq
+# python3 /usr/local/bin/scdl me -a -p "/Volumes/USB30FD/Music/Staff Recomendations/"
+# youtube-dl -o '~/Desktop/soundcloud/%(title)s.%(ext)s' https://soundcloud.com/charlielipford 
+# disconnect_from_hq

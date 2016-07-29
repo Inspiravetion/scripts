@@ -15,9 +15,11 @@ files="$(find $base_path -type f -name '*.mkv')"
 for file in $files; do
 	mp4file=${file%.mkv}.mp4
 
-	#if there isnt an mp4 file with the same basename create one
+	#if there isnt an mp4 file with the same basename create one and delete the mkv
 	if [ ! -f $mp4file ]; then
-		ffmpeg -y -i "$file" -vcodec copy -acodec copy "$mp4file";
+		if ffmpeg -y -i "$file" -vcodec copy -acodec copy "$mp4file"; then
+			rm $file
+		fi
 	fi
 	
 done

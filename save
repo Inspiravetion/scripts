@@ -1,9 +1,122 @@
 #!/bin/sh
 
-pushd $1
 
-git add .
-git commit -m "$2"
-git push origin master
+# function get_arg() { # Parse arguments
+#     while getopts "crskmado:l:p:hdq" opt
+#     do
+#         case $opt in
+#             h)
+#                 show_help full; exit 1
+#                 ;;
+#             c)
+#                 cont=":"
+#                 continue_info='continue'
+#                 ;;
+#             r)
+#                 onlyrepost=1
+#                 ;;
+#             o) # Need argument
+#                 default_offset=$OPTARG
+#                 if ! [[ $default_offset =~ $number ]] ; then
+#                     log 1 "Offset should be a number"; exit 1
+#                 fi
+#                 ;;
+#             l) # Need argument
+#                 userLink=$OPTARG
+#                 ;;
+#             p) # Need argument
+#                 if [ -d "$OPTARG" ]; then
+#                     pathtomusic="$OPTARG"
+#                 else
+#                     log 1 "Directory specified does not exist."; show_help; exit 1
+#                 fi
+#                 ;;
+#             d) # debug
+#                 logVerbosity=4
+#                 ;;
+#             q) # quiet
+#                 logVerbosity=2
+#                 ;;
+# 	    s) # subfolders , creates subfolders for each download / set
+#                 CreateFolders=1
+#                 ;;
+# 	    k) # (keep) save reposts in folder of poster
+#                 KeepFolders=1
+#                 ;;
+# 	    a) # no artist name in sogname (usefull if the guy is promoting other artists like mrsuicidesheep is doing)
+#                 NoArtistInSong=1
+#                 ;;
+# 	    m) #get songname by dividing at specific chars(multiple possible) for example the title "Dead Battery - Stay (feat. Lea Santee)" would have artist "Dead Battery" and songname "Stay..." in mp3 tags aswell as in songname
+# 		DivideChar=1
+#                 ;;
+#             \?)
+#                 show_help; exit 1
+#                 ;;
+#         esac
+#     done
+# }
 
-popd
+
+#save -foreach ./some/dir -only *.config "my message"
+function save_foreach() {
+	parent_dir=$1
+	message="$2".
+	branch=$3
+
+	
+}
+
+#save ./some/dir "my message" -onbranch gh-pages
+function save_all_branch() {
+	branch=$1
+	dir=$2
+	message="$3"
+
+	save_raw $dir . $message $branch
+}
+
+#save ./target/dir "my message"
+function save_all_master() {
+	dir=$1
+	message="$2"
+
+	save_raw $dir . $message master
+}
+
+#save ./target/dir -only *.config "message"
+#save ./target/dir -only *.config "message" -onbranch gh-pages
+function save_raw() {
+	dir=$1
+	pattern=$2
+	message="$3"
+	branch=$4
+
+	pushd $dir
+
+	git add $pattern
+	git commit -m $message
+	git push origin $branch
+
+	popd
+}
+
+option="${1}"
+
+echo $option
+
+case $option in
+	"onbranch")  
+		shift
+		echo save_all_branch $* ;;
+	"only")  
+	  	shift
+	  	echo save_raw $1 $2 $3 master ;;
+  	"onlyonbranch")  
+	  	shift
+	  	echo save_raw $* ;;
+	"foreach")  
+	  	shift
+	  	echo save_foreach $* ;;
+  	*)
+		save_all_master "$@"
+esac
